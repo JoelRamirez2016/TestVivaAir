@@ -33,8 +33,8 @@ public class SearchVivaairTest {
     @Test
     public void testVivaAirFormSubmit() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement origen, days;
-        List<WebElement> calendars_mount, passengers;
+        WebElement origen, days, submit;
+        List<WebElement> calendars_mount, submit_buttons, passengers;
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         js.executeScript("window.scrollBy(0,1000)");
@@ -61,6 +61,9 @@ public class SearchVivaairTest {
         passengers.get(1).click();
         passengers.get(3).click();
         passengers.get(5).click();
+        submit_buttons = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".ibe__inputs-button")));
+        submit = submit_buttons.stream().filter(button -> button.isDisplayed()).findAny().orElse(null);
+        submit.click();
     }
 
     @After
